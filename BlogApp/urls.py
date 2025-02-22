@@ -5,7 +5,7 @@ from django.contrib.auth.views import LoginView,LogoutView
 
 urlpatterns = [
     path('post_create/', PostCreateView.as_view(), name='post_create'),
-    path('post_list/', PostListView.as_view(), name='post_list'),
+    path('', PostListView.as_view(), name='post_list'),
     path('post_update/<int:pk>/', PostUpdateView.as_view(), name='post_update'),
     path('post_delete/<int:pk>/', PostDeleteView.as_view(), name='post_delete'),
     path('login/', LoginView.as_view(template_name='login.html'),name='login'),
