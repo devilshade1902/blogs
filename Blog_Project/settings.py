@@ -78,10 +78,10 @@ WSGI_APPLICATION = 'Blog_Project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'blogs_project_29j9',
-        'USER':'blogs_project_29j9_user',
-        'PASSWORD':'REaJCPtZHHGOa41mi1vARo2qHtkFJ5V9',
-        'HOST':'dpg-cust313tq21c73b92p30-a',
+        'NAME': 'blogs_project_mq62',
+        'USER':'blogs_project_mq62_user',
+        'PASSWORD':'i7rPclkgQoiEgfFTuLsvSsgZrQmsk7LI',
+        'HOST':'dpg-custa68gph6c73astem0-a',
         'PORT':'5432',
     }
 }
