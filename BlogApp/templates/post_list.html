@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            color: #4CAF50;
+        }
+        .post-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .post-item {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .post-item h3 {
+            color: #4CAF50;
+        }
+        .post-item p {
+            color: #555;
+        }
+        .post-item a {
+            color: #007bff;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        .post-item a:hover {
+            text-decoration: underline;
+        }
+        .create-post-btn {
+            display: block;
+            margin: 30px auto;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 18px;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+        }
+        .create-post-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Your Posts</h1>
+    <div class="post-list">
+        {% for post in posts %}
+            <div class="post-item">
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.content }}</p>
+                <a href="{% url 'post_update' post.id %}">Edit</a>
+                <a href="{% url 'post_delete' post.id %}">Delete</a>
+            </div>
+        {% endfor %}
+    </div>
+    <a href="{% url 'post_create' %}" class="create-post-btn">Create New Post</a>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+{% endblock %}

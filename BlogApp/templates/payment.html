@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #e9f7e9;
+    }
+    .container {
+        margin-top: 50px;
+    }
+    .payment-box {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    .btn-pay {
+        background-color: #4CAF50;
+        color: white;
+        font-weight: bold;
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .btn-pay:hover {
+        background-color: #388E3C;
+    }
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="payment-box">
+                <h3>Complete Your Payment</h3>
+                <p>You have selected the <strong>{{ plan_name }}</strong> plan.</p>
+                <h4 class="text-success">₹ {{ plan_price }}</h4>
+
+                <!-- Razorpay Button -->
+                <button id="rzp-button" class="btn btn-pay">Pay with Razorpay</button>
+
+                <form id="razorpay-form" action="{% url 'process_payment' %}" method="POST" hidden>
+                    {% csrf_token %}
+                    <input type="hidden" name="razorpay_payment_id" id="razorpay_payment_id">
+                    <input type="hidden" name="razorpay_order_id" id="razorpay_order_id">
+                    <input type="hidden" name="razorpay_signature" id="razorpay_signature">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    var options = {
+        "key": "{{ razorpay_key }}",
+        "amount": "{{ plan_price }}" * 100,
+        "currency": "INR",
+        "name": "Dummy App",
+        "description": "Payment for {{ plan_name }} Plan",
+        "order_id": "{{ razorpay_order_id }}",
+        "handler": function (response){
+            document.getElementById("razorpay_payment_id").value = response.razorpay_payment_id;
+            document.getElementById("razorpay_order_id").value = response.razorpay_order_id;
+            document.getElementById("razorpay_signature").value = response.razorpay_signature;
+            document.getElementById("razorpay-form").submit();
+        },
+        "theme": {
+            "color": "#4CAF50"
+        }
+    };
+    var rzp = new Razorpay(options);
+    document.getElementById("rzp-button").onclick = function(e){
+        rzp.open();
+        e.preventDefault();
+    };
+</script>
+
+{% endblock %}

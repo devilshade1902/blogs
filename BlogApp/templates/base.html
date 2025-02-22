@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #e9f7e9;
+        }
+
+        .navbar {
+            background-color: #4CAF50;
+        }
+
+        .navbar-brand,
+        .nav-link {
+            color: white !important;
+        }
+
+        .nav-link:hover {
+            color: #b2e3b2 !important;
+        }
+
+        .footer {
+            background-color: #4CAF50;
+            padding: 40px 0;
+        }
+
+        .footer h5 {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .footer a {
+            text-decoration: none;
+        }
+
+        .footer ul {
+            padding-left: 0;
+        }
+
+        .footer ul li {
+            margin-bottom: 8px;
+        }
+        h4 {
+        font-size: 24px;
+        font-weight: bold;
+        color: black; /* Green color */
+        text-align: center;
+        margin: 10px 20px;
+    }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="{% url 'post_list' %}">Blogs</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                <h4>Welcome {{user.username}}</h4>
+                    <li class="nav-item">
+                        <form method="POST" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Logout</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'user_create' %}">Signup</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row text-white">
+                <!-- Quick Links -->
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'post_list' %}" class="text-white">Home</a></li>
+                        <li><a href="{% url 'subscription_plans' %}" class="text-white">Subscription Plans</a></li>
+                        <li><a href="{% url 'about' %}" class="text-white">About Us</a></li>
+                        <li><a href="{% url 'contact' %}" class="text-white">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Social Links -->
+                <div class="col-md-4">
+                    <h5>Follow Us</h5>
+                    <a href="https://facebook.com" target="_blank" class="text-white mx-2">
+                        <i class="fab fa-facebook"></i> Facebook
+                    </a><br>
+                    <a href="https://twitter.com" target="_blank" class="text-white mx-2">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </a><br>
+                    <a href="https://instagram.com" target="_blank" class="text-white mx-2">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </a>
+                </div>
+
+                <!-- Subscription Button -->
+                <div class="col-md-4 text-center">
+                    <h5>Get Started</h5>
+                    <a href="{% url 'subscription_plans' %}" class="btn btn-light text-success font-weight-bold">
+                        View Plans & Pricing
+                    </a>
+                </div>
+            </div>
+
+            <hr class="bg-light">
+            <div class="text-center text-white">
+                <p>&copy; 2025 Blogs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FontAwesome for social icons -->
+    <script src="https://kit.fontawesome.com/YOUR_KIT_CODE.js" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
