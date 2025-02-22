@@ -77,12 +77,12 @@ WSGI_APPLICATION = 'Blog_Project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'blogdb',
-        'USER':'root',
-        'PASSWORD':'Dhruvtiger@1708',
-        'HOST':'localhost',
-        'PORT':'3306',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'blogs_project_b5z6',
+        'USER':'blogs_project_b5z6_user',
+        'PASSWORD':'CWNTYvNWw5ldMxz52m0ABwEjwQVzm2Pf',
+        'HOST':'dpg-cusr78bqf0us739nstc0-a',
+        'PORT':'5432',
     }
 }
 
@@ -122,6 +122,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 RAZORPAY_KEY_ID = "rzp_test_RA0wiCL92CZbSd"
 RAZORPAY_KEY_SECRET = "mVmX48PXiwvWwYTGN6wE5aqC"
